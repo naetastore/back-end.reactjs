@@ -4,6 +4,7 @@ import General from '../General';
 import Category from '../Category';
 import Product from '../Product';
 import BlankPage from '../BlankPage';
+import User from '../User';
 
 function Administrator(props) {
     return (
@@ -25,6 +26,9 @@ function Administrator(props) {
                             </Nav.Item>
                             <hr />
                             <Nav.Item>
+                                <Nav.Link href="#users" eventKey="users">Pengguna</Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item>
                                 <Nav.Link eventKey="blankpage">Blank Page</Nav.Link>
                             </Nav.Item>
                         </Nav>
@@ -41,6 +45,9 @@ function Administrator(props) {
                                     </Tab.Pane>
                                     <Tab.Pane eventKey="products">
                                         <Product />
+                                    </Tab.Pane>
+                                    <Tab.Pane eventKey="users">
+                                        <User />
                                     </Tab.Pane>
                                     <Tab.Pane eventKey="blankpage">
                                         <BlankPage />

@@ -95,7 +95,7 @@ function Category(props) {
             <Col md={10}>
                 <Button variant="primary" className="mb-3" onClick={() => setModalShow(true)}>
                     Tambah Data
-                        </Button>
+                </Button>
 
                 <AddCategory
                     onSubmit={add} show={modalShow} onHide={() => setModalShow(false)} />
