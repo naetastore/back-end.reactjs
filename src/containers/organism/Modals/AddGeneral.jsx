@@ -67,20 +67,15 @@ class AddGeneral extends React.Component {
         return (
             <Modal
                 {...this.props}
-                size="lg"
+                size="md"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
             >
-                <Modal.Header closeButton>
-                    <Modal.Title id="contained-modal-title-vcenter">
-                        Tambah Kategori Umum
-                </Modal.Title>
-                </Modal.Header>
-                <Form>
+                <Form className="pt-3">
                     <Modal.Body>
                         <Container className="m-0 p-0">
-                            <Row className="show-grid text-center">
-                                <Col xs={5}>
+                            <Row className="show-grid text-center mx-auto">
+                                <Col md={6} xs={12}>
                                     <input
                                         onChange={this.changeValue}
                                         ref={fileInput => this.fileInput = fileInput}
@@ -90,12 +85,11 @@ class AddGeneral extends React.Component {
                                         style={{ cursor: "pointer" }}
                                         onClick={() => this.fileInput.click()}
                                         src={this.state.preview}
-                                        className="mb-3 img-fluid"
+                                        className="mb-3 img-fluid img-thumbnail"
                                         alt="preview"
-                                        height="300px"
                                     />
                                 </Col>
-                                <Col xs={7}>
+                                <Col md={6} xs={12}>
                                     <Form.Group controlId="name">
                                         <Form.Control
                                             onChange={this.changeValue}
@@ -116,8 +110,11 @@ class AddGeneral extends React.Component {
                             </Row>
                         </Container>
                     </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="secondary" onClick={this.props.onHide}>Tutup</Button>
+                    <Modal.Footer className="p-1">
+                        <Button
+                            variant="outline-secondary"
+                            onClick={this.props.onHide}
+                        >Batalkan</Button>
                         <Button
                             disabled={this.state.disabled}
                             onClick={this.submit}

@@ -65,12 +65,7 @@ class UpdateCategory extends React.Component {
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
             >
-                <Modal.Header closeButton>
-                    <Modal.Title id="contained-modal-title-vcenter">
-                        Tambah Kategori
-                </Modal.Title>
-                </Modal.Header>
-                <Form>
+                <Form className="pt-3">
                     <Modal.Body>
                         <Container className="m-0 p-0">
                             <Row className="show-grid text-center">
@@ -108,13 +103,18 @@ class UpdateCategory extends React.Component {
                             </Row>
                         </Container>
                     </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="secondary" onClick={this.props.onHide}>Tutup</Button>
+                    <Modal.Footer className="p-1">
+                        <Button
+                            variant="outline-secondary"
+                            disabled={this.props.isloading === 'true' ? true : this.state.disabled}
+                            onClick={this.props.onHide}
+                        >Batalkan</Button>
                         {this.props.children}
                         <Button
+                            variant="success"
                             disabled={this.props.isloading === 'true' ? true : this.state.disabled}
                             onClick={() => this.props.onSubmit(this.state.data)}
-                        >Simpan</Button>
+                        >Simpan Perubahan</Button>
                     </Modal.Footer>
                 </Form>
             </Modal>

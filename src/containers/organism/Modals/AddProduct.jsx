@@ -209,7 +209,10 @@ class AddProduct extends React.Component {
                         </Container>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="secondary" onClick={this.props.onHide}>Tutup</Button>
+                        <Button
+                            variant="outline-secondary"
+                            onClick={this.props.onHide}
+                        >Batalkan</Button>
                         <Button
                             disabled={this.state.disabled}
                             onClick={this.submit}

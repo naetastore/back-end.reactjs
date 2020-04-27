@@ -67,12 +67,7 @@ class AddCategory extends React.Component {
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
             >
-                <Modal.Header closeButton>
-                    <Modal.Title id="contained-modal-title-vcenter">
-                        Tambah Kategori
-                </Modal.Title>
-                </Modal.Header>
-                <Form>
+                <Form className="pt-3">
                     <Modal.Body>
                         <Container className="m-0 p-0">
                             <Row className="show-grid text-center">
@@ -108,12 +103,15 @@ class AddCategory extends React.Component {
                             </Row>
                         </Container>
                     </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="secondary" onClick={this.props.onHide}>Tutup</Button>
+                    <Modal.Footer className="p-1">
+                        <Button
+                            variant="outline-secondary"
+                            onClick={this.props.onHide}
+                        >Batalkan</Button>
                         <Button
                             disabled={this.state.disabled}
                             onClick={this.submit}
-                        >Simpan</Button>
+                        >Tambah</Button>
                     </Modal.Footer>
                 </Form>
             </Modal>

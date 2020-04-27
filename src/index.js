@@ -8,6 +8,7 @@ import './assets/css/global.css';
 import store from './config/redux/store';
 import { Provider } from 'react-redux';
 import Routes from './config/Routes';
+import 'react-perfect-scrollbar/dist/css/styles.css';
 
 ReactDOM.render(
   <Provider store={store}>

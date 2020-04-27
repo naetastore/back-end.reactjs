@@ -44,7 +44,7 @@ body {
 
 nav> a {
     transition: .1s ease-in-out color;
-    padding: 10px;
+    /* padding: 10px; */
 }
 
 nav> a:not(.navbar-brand) {
@@ -56,7 +56,11 @@ nav>a.navbar-brand {
 }
 .navbar-dark .navbar-brand{
     color: #61dafb;
-    width: 50px;
+    /* width: 50px; */
+}
+
+.bg-dark {
+    background-color: #20232a!important;
 }
 
 span.counter {
@@ -78,13 +82,11 @@ span.counter {
 }
 
 .container:first-of-type {
-    margin-top: 60px;
+    margin-top: 59px;
 }
+
 .jumbotron {
     margin-top: 58px;
-}
-.container:last-child {
-    margin-bottom: 80px;
 }
 
 .container>.row>div>h4 {
@@ -132,15 +134,7 @@ button:disabled {
 
 @media screen and (max-width: 991px) {
     .sidebar {
-        position: fixed;
-        max-height: calc(100vh - 60px);
-        top: 60px;
-        bottom: 0;
-        overflow: auto;
-        right: -257px;
-        -webkit-transition: all 0.25s ease-out;
-        -o-transition: all 0.25s ease-out;
-        transition: all 0.25s ease-out;
+        display: none;
     }
 }
 
@@ -152,5 +146,14 @@ button:disabled {
     color: rgba(26,26,26,.75);
 }
 .nav-link.active {
-    color: #4d83ff;
+    color: #00c4f9;
+}
+
+.-p_ {
+    padding-top: 30px;
+    padding-bottom: 65px;
+}
+
+h1.page-heading {
+    margin-bottom: 40px;
 }

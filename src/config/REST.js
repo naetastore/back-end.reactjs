@@ -1,9 +1,9 @@
 const server = {
     // online
-    // 'url': 'https://naeta-rest-server.000webhostapp.com/',
+    'url': 'https://naeta-rest-server.000webhostapp.com/',
 
     // local development
-    'url': 'http://localhost/rest/',
+    // 'url': 'http://localhost/rest/',
 
     'apikey': {
         'name': 'apikey',

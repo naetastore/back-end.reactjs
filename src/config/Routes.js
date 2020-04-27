@@ -12,7 +12,7 @@ function Routes() {
             <Route path="/" exact component={Auth} />
             <Route path="/_rdn" component={Rdn} />
             <Route path="/_rdn/home" component={Home} />
-            <Route path="/_rdn/administrator" component={Administrator} />
+            <Route path="/_rdn/administrator" exact component={Administrator} />
             <Route path="/_rdn/administrator/order/:entry" exact component={Order} />
 
         </BrowserRouter>

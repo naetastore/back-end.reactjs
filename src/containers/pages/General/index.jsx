@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button } from 'react-bootstrap';
+import { Table, Button, Row, Col } from 'react-bootstrap';
 import AddGeneral from '../../organism/Modals/AddGeneral';
 import axios from 'axios';
 import { REST } from '../../../config/REST';
 import store from '../../../config/redux/store';
 import session from '../../../config/session';
 import UpdateGeneral from '../../organism/Modals/UpdateGeneral';
+import Image from 'react-bootstrap/Image'
+import PerfectScrollbar from 'react-perfect-scrollbar'
 
 function General(props) {
 
@@ -101,45 +103,82 @@ function General(props) {
 
     return (
         <>
-            <Button variant="primary" className="mb-3" onClick={() => setModalShow(true)}>
-                Tambah Data
-            </Button>
+            <Row className="-p_ mx-auto">
+                <Col md={10} id="style">
+                    <h1 className="page-heading">Kategori Umum</h1>
 
-            <AddGeneral
-                onSubmit={add} show={modalShow} onHide={() => setModalShow(false)} />
+                    <h2>Style</h2>
+                    <p>Says something here.</p>
+                    <Row>
+                        <PerfectScrollbar>
+                            <Col md={12} className="d-flex">
+                                {generals.map((g, i) =>
+                                    <Image
+                                        key={i} src={g.image} fluid thumbnail
+                                        style={{
+                                            height: "180px",
+                                            marginRight: "15px",
+                                            borderRadius: "10px",
+                                            cursor: "pointer"
+                                        }}
+                                        onClick={() => show(g.id)}
+                                    />
+                                )}
+                            </Col>
+                        </PerfectScrollbar>
+                    </Row>
 
-            <UpdateGeneral
-                data={details}
-                onSubmit={update}
-                show={modalShowDetails}
-                onHide={() => setModalShowDetails(false)}
-                isloading={isLoading.toString()}
-            >
-                <Button variant="danger" disabled={isLoading} onClick={deleteGeneral}>Hapus</Button>
-            </UpdateGeneral>
+                    <AddGeneral
+                        onSubmit={add} show={modalShow} onHide={() => setModalShow(false)} />
 
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th style={{ width: "80px" }}>ID</th>
-                        <th>Nama</th>
-                        <th>Description</th>
-                        <th>Start Price</th>
-                        <th>High Price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {generals.map((g, i) =>
-                        <tr style={{ cursor: "pointer" }} key={i} onClick={() => show(g.id)}>
-                            <td>#{g.id}</td>
-                            <td>{g.name}</td>
-                            <td>{g.description}</td>
-                            <td>{g.start_price}</td>
-                            <td>{g.high_price}</td>
-                        </tr>
-                    )}
-                </tbody>
-            </Table>
+                    <UpdateGeneral
+                        data={details}
+                        onSubmit={update}
+                        show={modalShowDetails}
+                        onHide={() => setModalShowDetails(false)}
+                        isloading={isLoading.toString()}
+                    >
+                        <Button variant="outline-danger" disabled={isLoading} onClick={deleteGeneral}>Hapus</Button>
+                    </UpdateGeneral>
+
+                    <h2 className="mt-5">Tabel</h2>
+                    <p>Says something here.
+                        <Button size="sm" variant="outline-primary" className="ml-2" onClick={() => setModalShow(true)}>
+                            Tambah Data
+                        </Button>
+                    </p>
+                    <Table striped bordered hover className="mt-3">
+                        <thead>
+                            <tr>
+                                <th style={{ width: "80px" }}>ID</th>
+                                <th>Nama</th>
+                                <th>Description</th>
+                                <th>Start Price</th>
+                                <th>High Price</th>
+                                <th style={{ width: "40px" }}></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {generals.map((g, i) =>
+                                <tr style={{ cursor: "pointer" }} key={i} onClick={() => show(g.id)}>
+                                    <td>#{g.id}</td>
+                                    <td>{g.name}</td>
+                                    <td>{g.description}</td>
+                                    <td>{g.start_price}</td>
+                                    <td>{g.high_price}</td>
+                                    <td>
+                                        <Button
+                                            size="sm"
+                                            variant="outline-success"
+                                            onClick={() => show(g.id)}
+                                        >Edit</Button>
+                                    </td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </Table>
+                </Col>
+            </Row>
         </>
     );
 }

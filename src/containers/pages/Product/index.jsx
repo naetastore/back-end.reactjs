@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Table, Button } from 'react-bootstrap';
+import { Table, Button, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import { REST } from '../../../config/REST';
 import ModalAddProduct from '../../organism/Modals/AddProduct';
 import session from '../../../config/session';
 import ModalUpdateProduct from '../../organism/Modals/UpdateProduct';
 import store from '../../../config/redux/store';
+import PerfectScrollbar from 'react-perfect-scrollbar'
 
 function Product(props) {
 
@@ -113,47 +114,51 @@ function Product(props) {
     }
 
     return (
-        <>
-            <Button variant="primary" className="mb-3" onClick={() => setModalShow(true)}>
-                Tambah Data
-                    </Button>
+        <Row className="-p_ mx-auto">
+            <Col md={10}>
+                <Button variant="primary" className="mb-3" onClick={() => setModalShow(true)}>
+                    Tambah Data
+                </Button>
 
-            <ModalAddProduct
-                onSubmit={add} show={modalShow} onHide={() => setModalShow(false)} />
+                <ModalAddProduct
+                    onSubmit={add} show={modalShow} onHide={() => setModalShow(false)} />
 
-            <ModalUpdateProduct
-                data={details}
-                onSubmit={update}
-                show={modalShowDetails}
-                onHide={() => setModalShowDetails(false)}
-                isloading={isLoading.toString()}
-            >
-                <Button variant="danger" disabled={isLoading} onClick={deleteProduct}>Hapus</Button>
-            </ModalUpdateProduct>
+                <ModalUpdateProduct
+                    data={details}
+                    onSubmit={update}
+                    show={modalShowDetails}
+                    onHide={() => setModalShowDetails(false)}
+                    isloading={isLoading.toString()}
+                >
+                    <Button variant="outline-danger" disabled={isLoading} onClick={deleteProduct}>Hapus</Button>
+                </ModalUpdateProduct>
 
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th style={{ width: "80px" }}>ID</th>
-                        <th>Nama</th>
-                        <th>Harga</th>
-                        <th>Kuantitas</th>
-                        <th>Terjual</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {products.map((p, i) =>
-                        <tr style={{ cursor: "pointer" }} key={i} onClick={() => show(p.id)}>
-                            <td>#{p.id}</td>
-                            <td>{p.name}</td>
-                            <td>{p.price}</td>
-                            <td>{p.qty}</td>
-                            <td>{p.selled}</td>
-                        </tr>
-                    )}
-                </tbody>
-            </Table>
-        </>
+                <PerfectScrollbar>
+                    <Table striped bordered hover>
+                        <thead>
+                            <tr>
+                                <th style={{ width: "80px" }}>ID</th>
+                                <th>Nama</th>
+                                <th>Harga</th>
+                                <th>Kuantitas</th>
+                                <th>Terjual</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {products.map((p, i) =>
+                                <tr style={{ cursor: "pointer" }} key={i} onClick={() => show(p.id)}>
+                                    <td>#{p.id}</td>
+                                    <td>{p.name}</td>
+                                    <td>{p.price}</td>
+                                    <td>{p.qty}</td>
+                                    <td>{p.selled}</td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </Table>
+                </PerfectScrollbar>
+            </Col>
+        </Row>
     );
 }
 

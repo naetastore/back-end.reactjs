@@ -9,6 +9,7 @@ function Auth(props) {
     const [disabled, setDisabled] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [initialized, setInitialized] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
         if (!initialized) {
@@ -53,7 +54,12 @@ function Auth(props) {
                 setIsLoading(false);
 
                 redirect();
-            }).catch(err => console.log(err.response));
+            }).catch(err => {
+                console.log(err.response);
+                const errorMessage = err.response.data.message;
+                setErrorMessage(errorMessage);
+                setIsLoading(false);
+            });
     }
 
     const setUser = data => {
@@ -74,7 +80,15 @@ function Auth(props) {
     return (
         <Fragment>
             <form onSubmit={submit} className="middle-scr">
+                <div className="text-danger"
+                    style={{
+                        position: "absolute",
+                        top: "40vh"
+                    }}
+                >{errorMessage}</div>
+                <h2>Log In</h2>
                 <input
+                    className="ml-4"
                     autoFocus="on"
                     placeholder="Nama pengguna"
                     type="text"
@@ -86,6 +100,7 @@ function Auth(props) {
                     id="password"
                     onChange={change} />
                 <button
+                    className="ml-4"
                     disabled={disabled | isLoading}
                     type="submit"
                     style={{ width: "100px" }}

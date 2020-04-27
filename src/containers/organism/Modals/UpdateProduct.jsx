@@ -206,12 +206,17 @@ class UpdateProduct extends React.Component {
                         </Container>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="secondary" onClick={this.props.onHide}>Tutup</Button>
+                        <Button
+                            variant="outline-secondary"
+                            disabled={this.props.isloading === 'true' ? true : this.state.disabled}
+                            onClick={this.props.onHide}
+                        >Batalkan</Button>
                         {this.props.children}
                         <Button
+                            variant="success"
                             disabled={this.props.isloading === 'true' ? true : this.state.disabled}
                             onClick={() => this.props.onSubmit(this.state.product)}
-                        >{this.props.isloading === 'true' ? 'Memuat' : 'Simpan'}</Button>
+                        >{this.props.isloading === 'true' ? 'Sedang Menyimpan' : 'Simpan Perubahan'}</Button>
                     </Modal.Footer>
                 </Form>
             </Modal>

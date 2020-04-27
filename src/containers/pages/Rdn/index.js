@@ -4,7 +4,7 @@ import store from '../../../config/redux/store';
 import axios from 'axios';
 import { REST } from '../../../config/REST';
 import { NavLink } from 'react-router-dom';
-import { Navbar, Nav, Spinner } from 'react-bootstrap';
+import { Navbar, Nav, Spinner, NavDropdown } from 'react-bootstrap';
 import logo from '../../../assets/img/logo/logo.svg';
 
 function Rdn(props) {
@@ -23,7 +23,7 @@ function Rdn(props) {
         let s = session.get;
 
         if (s('username') === null) {
-            props.history.push('/?admin/dashboard');
+            props.history.push('/?_rdn/home');
             return;
         }
 
@@ -59,30 +59,41 @@ function Rdn(props) {
 
     const logout = e => {
         e.preventDefault();
-
-        if (!window.confirm('Apakah kamu yakin ingin keluar?')) return;
-
         session.unset();
         props.history.push('/');
     }
 
     return (
-        <Navbar bg="dark" variant="dark" expand="lg" fixed="top">
+        <Navbar fixed="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Navbar.Brand href="#home">
                 <img src={logo} alt="logo" height="30" style={{ borderRadius: "8px" }} />
             </Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" className="mr-5" />
-            <Navbar.Collapse id="basic-navbar-nav">
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
-                    <NavLink className="nav-link mr-2" classactive="active" to="/_rdn/home">Home</NavLink>
-                    <NavLink className="nav-link ml-2 mr-2" classactive="active" to="/_rdn/notification">
-                        Notification{notification > 0 ? <span style={{ position: "absolute" }} className="counter">{notification}</span> : <></>}
+                    <NavLink className="nav-link" classactive="active" to="/_rdn/home">Home</NavLink>
+                    <NavLink className="nav-link" classactive="active" to="/_rdn/notification">
+                        Notification{notification > 0 ? <span style={{ position: "relative" }} className="counter">{notification}</span> : <></>}
                     </NavLink>
-                    <NavLink className="nav-link ml-2 mr-2" classactive="active" to="/_rdn/administrator">Administrator</NavLink>
-                    <NavLink className="nav-link ml-2" to="/" exact onClick={logout}>Logout</NavLink>
+                    <NavLink className="nav-link" classactive="active" to="/_rdn/administrator">Administrator</NavLink>
                 </Nav>
+                <Nav className="mr-5">
+                    <NavDropdown title="Account" id="collasible-nav-dropdown">
+                        <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+                        <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                        <NavDropdown.Divider />
+                        <NavDropdown.Item href="#" onClick={logout}>
+                            Logout
+                        </NavDropdown.Item>
+                    </NavDropdown>
+                    <Nav.Link href="#deets">More deets</Nav.Link>
+                    <Nav.Link eventKey={2} href="#memes">
+                        Dank memes
+                    </Nav.Link>
+                </Nav>
+                <Spinner animation="border" variant="primary" className={loading ? '' : 'd-none'} />
             </Navbar.Collapse>
-            <Spinner animation="border" variant="primary" className={loading ? '' : 'd-none'} />
         </Navbar>
     );
 }

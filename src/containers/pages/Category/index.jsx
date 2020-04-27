@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button } from 'react-bootstrap';
+import { Table, Button, Row, Col } from 'react-bootstrap';
 import store from '../../../config/redux/store';
 import axios from 'axios';
 import { REST } from '../../../config/REST';
@@ -67,16 +67,16 @@ function Category(props) {
                 setIsLoading(false);
 
                 getData();
-            }).catch(err => console.error(err));
+            }).catch(err => console.error(err.response));
     }
 
-    const deleteCategory = () => {
+    const deleteCategory = id => {
         setIsLoading(true);
 
         const s = {
             username: session.get('username'),
             password: session.get('password'),
-            id: details.id,
+            id,
             delete: 1
         };
         axios.get(`${REST.server.url}api/category`, { params: s })
@@ -91,43 +91,57 @@ function Category(props) {
     }
 
     return (
-        <>
-            <Button variant="primary" className="mb-3" onClick={() => setModalShow(true)}>
-                Tambah Data
-                    </Button>
+        <Row className="-p_ mx-auto">
+            <Col md={10}>
+                <Button variant="primary" className="mb-3" onClick={() => setModalShow(true)}>
+                    Tambah Data
+                        </Button>
 
-            <AddCategory
-                onSubmit={add} show={modalShow} onHide={() => setModalShow(false)} />
+                <AddCategory
+                    onSubmit={add} show={modalShow} onHide={() => setModalShow(false)} />
 
-            <UpdateCategory
-                data={details}
-                onSubmit={update}
-                show={modalShowDetails}
-                onHide={() => setModalShowDetails(false)}
-                isloading={isLoading.toString()}
-            >
-                <Button variant="danger" disabled={isLoading} onClick={deleteCategory}>Hapus</Button>
-            </UpdateCategory>
+                <UpdateCategory
+                    data={details}
+                    onSubmit={update}
+                    show={modalShowDetails}
+                    onHide={() => setModalShowDetails(false)}
+                    isloading={isLoading.toString()}
+                >
+                    <Button
+                        variant="outline-danger"
+                        disabled={isLoading}
+                        onClick={() => deleteCategory(details.id)}
+                    >Hapus</Button>
+                </UpdateCategory>
 
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th style={{ width: "80px" }}>ID</th>
-                        <th>Nama</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {categories.map((c, i) =>
-                        <tr style={{ cursor: "pointer" }} key={i} onClick={() => show(c.id)}>
-                            <td>#{c.id}</td>
-                            <td>{c.name}</td>
-                            <td>{c.description}</td>
+                <Table striped bordered hover>
+                    <thead>
+                        <tr>
+                            <th style={{ width: "80px" }}>ID</th>
+                            <th>Nama</th>
+                            <th>Description</th>
+                            <th style={{ width: "40px" }}></th>
                         </tr>
-                    )}
-                </tbody>
-            </Table>
-        </>
+                    </thead>
+                    <tbody>
+                        {categories.map((c, i) =>
+                            <tr style={{ cursor: "pointer" }} key={i} onClick={() => show(c.id)}>
+                                <td>#{c.id}</td>
+                                <td>{c.name}</td>
+                                <td>{c.description}</td>
+                                <td>
+                                    <Button
+                                        size="sm"
+                                        variant="outline-success"
+                                        onClick={() => show(c.id)}
+                                    >Edit</Button>
+                                </td>
+                            </tr>
+                        )}
+                    </tbody>
+                </Table>
+            </Col>
+        </Row>
     );
 }
 
