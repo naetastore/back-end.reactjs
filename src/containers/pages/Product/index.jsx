@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Row, Col, Table, Button } from 'react-bootstrap';
+import { Table, Button } from 'react-bootstrap';
 import axios from 'axios';
 import { REST } from '../../../config/REST';
 import ModalAddProduct from '../../organism/Modals/AddProduct';
@@ -27,10 +27,6 @@ function Product(props) {
         axios.get(`${REST.server.url}api/product`)
             .then(res => {
                 let product = res.data.product;
-
-                if (props.match.params.cid) {
-                    product = product.filter(p => p.category_id === props.match.params.cid);
-                }
 
                 setProducts(product);
                 store.dispatch({ type: 'SET_LOADING', data: false });
@@ -97,6 +93,8 @@ function Product(props) {
     }
 
     const deleteProduct = () => {
+        setIsLoading(true);
+
         const s = {
             username: session.get('username'),
             password: session.get('password'),
@@ -105,58 +103,57 @@ function Product(props) {
         };
         axios.get(`${REST.server.url}api/product`, { params: s })
             .then(res => {
+                setIsLoading(false);
+
                 const data = products.filter(p => Number(p.id) !== Number(res.data.id));
                 setProducts(data);
-                setModalShow(false);
+
+                setModalShowDetails(false);
             }).catch(err => console.error(err));
     }
 
     return (
-        <Container>
-            <Row>
-                <Col lg={12}>
-                    <Button variant="primary" className="mb-3" onClick={() => setModalShow(true)}>
-                        Tambah Product
+        <>
+            <Button variant="primary" className="mb-3" onClick={() => setModalShow(true)}>
+                Tambah Data
                     </Button>
 
-                    <ModalAddProduct
-                        onSubmit={add} show={modalShow} onHide={() => setModalShow(false)} />
+            <ModalAddProduct
+                onSubmit={add} show={modalShow} onHide={() => setModalShow(false)} />
 
-                    <ModalUpdateProduct
-                        data={details}
-                        onSubmit={update}
-                        show={modalShowDetails}
-                        onHide={() => setModalShowDetails(false)}
-                        isloading={isLoading.toString()}
-                    >
-                        <Button variant="danger" onClick={deleteProduct}>Hapus</Button>
-                    </ModalUpdateProduct>
+            <ModalUpdateProduct
+                data={details}
+                onSubmit={update}
+                show={modalShowDetails}
+                onHide={() => setModalShowDetails(false)}
+                isloading={isLoading.toString()}
+            >
+                <Button variant="danger" disabled={isLoading} onClick={deleteProduct}>Hapus</Button>
+            </ModalUpdateProduct>
 
-                    <Table striped bordered hover>
-                        <thead>
-                            <tr>
-                                <th style={{ width: "80px" }}>ID</th>
-                                <th>Nama</th>
-                                <th>Harga</th>
-                                <th>Kuantitas</th>
-                                <th>Terjual</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {products.map((p, i) =>
-                                <tr style={{ cursor: "pointer" }} key={i} onClick={() => show(p.id)}>
-                                    <td>#{p.id}</td>
-                                    <td>{p.name}</td>
-                                    <td>{p.price}</td>
-                                    <td>{p.qty}</td>
-                                    <td>{p.selled}</td>
-                                </tr>
-                            )}
-                        </tbody>
-                    </Table>
-                </Col>
-            </Row>
-        </Container>
+            <Table striped bordered hover>
+                <thead>
+                    <tr>
+                        <th style={{ width: "80px" }}>ID</th>
+                        <th>Nama</th>
+                        <th>Harga</th>
+                        <th>Kuantitas</th>
+                        <th>Terjual</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {products.map((p, i) =>
+                        <tr style={{ cursor: "pointer" }} key={i} onClick={() => show(p.id)}>
+                            <td>#{p.id}</td>
+                            <td>{p.name}</td>
+                            <td>{p.price}</td>
+                            <td>{p.qty}</td>
+                            <td>{p.selled}</td>
+                        </tr>
+                    )}
+                </tbody>
+            </Table>
+        </>
     );
 }
 

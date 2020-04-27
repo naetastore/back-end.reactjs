@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import axios from 'axios';
 import { REST } from '../../../config/REST';
 import store from '../../../config/redux/store';
@@ -6,7 +6,24 @@ import session from '../../../config/session';
 
 function Auth(props) {
     const [data, setData] = useState({ username: '', password: '' });
-    const [disabled, setDisabled] = useState(true);
+    const [disabled, setDisabled] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [initialized, setInitialized] = useState(false);
+
+    useEffect(() => {
+        if (!initialized) {
+            checkForms();
+        }
+    });
+
+    const checkForms = () => {
+        if (data.username && data.password) {
+            setDisabled(false);
+        } else {
+            setDisabled(true);
+        }
+        setInitialized(true);
+    }
 
     const change = e => {
         let newData = { ...data };
@@ -24,12 +41,16 @@ function Auth(props) {
     const submit = event => {
         event.preventDefault();
 
+        setIsLoading(true);
+
         axios.get(`${REST.server.url}api/users`, { params: data })
             .then(res => {
                 if (res.data.role_id > 1) return;
 
                 res.data['password'] = data.password;
                 setUser(res.data);
+
+                setIsLoading(false);
 
                 redirect();
             }).catch(err => console.log(err.response));
@@ -53,9 +74,24 @@ function Auth(props) {
     return (
         <Fragment>
             <form onSubmit={submit} className="middle-scr">
-                <input autoFocus="on" placeholder="Nama pengguna" type="text" id="username" onChange={change} />
-                <input placeholder="Kata sandi" type="password" id="password" onChange={change} />
-                <button disabled={disabled} type="submit">submit</button>
+                <input
+                    autoFocus="on"
+                    placeholder="Nama pengguna"
+                    type="text"
+                    id="username"
+                    onChange={change} />
+                <input
+                    placeholder="Kata sandi"
+                    type="password"
+                    id="password"
+                    onChange={change} />
+                <button
+                    disabled={disabled | isLoading}
+                    type="submit"
+                    style={{ width: "100px" }}
+                >
+                    {isLoading ? 'tunggu..' : 'Masuk'}
+                </button>
             </form>
         </Fragment>
     );

@@ -5,7 +5,6 @@ import Rdn from '../containers/pages/Rdn';
 import Home from '../containers/pages/Home';
 import Order from '../containers/pages/Order';
 import Administrator from '../containers/pages/Administrator';
-import Product from '../containers/pages/Product';
 
 function Routes() {
     return (
@@ -13,10 +12,8 @@ function Routes() {
             <Route path="/" exact component={Auth} />
             <Route path="/_rdn" component={Rdn} />
             <Route path="/_rdn/home" component={Home} />
-            <Route path="/_rdn/administrator" exact component={Administrator} />
+            <Route path="/_rdn/administrator" component={Administrator} />
             <Route path="/_rdn/administrator/order/:entry" exact component={Order} />
-            <Route path="/_rdn/administrator/product/" exact component={Product} />
-            <Route path="/_rdn/administrator/product/:cid" exact component={Product} />
 
         </BrowserRouter>
     );

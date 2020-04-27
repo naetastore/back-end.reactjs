@@ -31,6 +31,20 @@ class AddProduct extends React.Component {
         if (this.props.show && !this.state.initialized) this.getDataCategory();
     }
 
+    initState = () => {
+        const product = {
+            name: '',
+            price: 0,
+            qty: 0,
+            image: null,
+            description: '',
+            category_id: 0,
+            suggested: 0,
+            is_ready: 1
+        };
+        this.setState({ product, preview: dummy, disabled: true });
+    }
+
     getDataCategory = () => {
         axios.get(`${REST.server.url}api/category`)
             .then(res => {
@@ -74,9 +88,7 @@ class AddProduct extends React.Component {
 
     submit = () => {
         this.props.onSubmit(this.state.product);
-        let product = { ...this.state.product };
-        product['image'] = null;
-        this.setState({ product, preview: dummy, disabled: true });
+        this.initState();
     }
 
     changeCheckboxe = e => {

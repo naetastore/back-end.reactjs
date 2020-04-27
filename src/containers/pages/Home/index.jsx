@@ -48,7 +48,7 @@ function Home(props) {
     return (
         <Fragment>
             <Jumbotron fluid>
-                <h1>Counter</h1>
+                <h1>Hi, {session.get('username')}</h1>
                 <p>
                     Produk {basic.product} | Pesanan {basic.order} | Terjual {basic.selled}
                     <br />

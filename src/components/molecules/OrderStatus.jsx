@@ -5,14 +5,19 @@ function OrderStatus(props) {
 
     const [status, setStatus] = useState({ variant: '', label: '' });
     const [initialized, setInitialized] = useState(false);
+    const [purchased, setPurchased] = useState(0);
 
     useEffect(() => {
         if (!initialized && props.data.purchased) {
             checkStatus();
         }
+        if (initialized && props.data.purchased !== purchased) {
+            checkStatus();
+        }
     });
 
     const checkStatus = () => {
+        setPurchased(props.data.purchased);
 
         if (Number(props.data.purchased) > 0) {
             setStatus({ variant: 'info', label: 'Dibayar' });

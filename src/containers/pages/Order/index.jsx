@@ -65,13 +65,13 @@ function Order(props) {
 
         axios.post(`${REST.server.url}api/orders`, s)
             .then(res => {
-                alert(res.data.message);
+                // let newData = { ...order };
+                // newData.summary.product.find(p => p.entry === entry)['purchased'] = 1;
 
-                let newData = { ...order };
-                newData.summary.product.find(p => p.entry === entry)['purchased'] = 1;
-
-                setOrder(newData);
-            }).catch(err => console.log(err));
+                // setOrder(newData);
+                getData();
+                console.log(res);
+            }).catch(err => console.log(err.response));
     }
 
     const remove = entry => {
