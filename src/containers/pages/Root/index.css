@@ -1,0 +1,32 @@
+.jumbotron>h1 {
+    font-weight: 700 !important;
+    font-size: 2.85714rem !important;
+}
+
+@media (min-width: 0) {
+    .jumbotron>h1 {
+        margin-bottom: 2.14286rem !important;
+    }
+}
+@media (min-width: 768px) {
+    .jumbotron>h1 {
+        font-size: 4rem !important;
+    }
+}
+
+.jumbotron>h2 {
+    font-weight: 300;
+    font-size: 1.42857rem !important;
+}
+
+@media (min-width: 768px) {
+    .jumbotron>h2 {
+        font-size: 2.5rem !important;
+    }
+}
+
+@media (min-width: 576px) {
+    .jumbotron>h2 {
+        font-size: 1.78571rem !important;
+    }
+}

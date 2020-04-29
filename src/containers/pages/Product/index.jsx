@@ -116,9 +116,11 @@ function Product(props) {
     return (
         <Row className="-p_ mx-auto">
             <Col md={10}>
-                <Button variant="primary" className="mb-3" onClick={() => setModalShow(true)}>
-                    Tambah Data
-                </Button>
+                <Button
+                    variant="outline-primary"
+                    className="mb-3"
+                    onClick={() => setModalShow(true)}
+                >Tambah Data</Button>
 
                 <ModalAddProduct
                     onSubmit={add} show={modalShow} onHide={() => setModalShow(false)} />
@@ -130,7 +132,11 @@ function Product(props) {
                     onHide={() => setModalShowDetails(false)}
                     isloading={isLoading.toString()}
                 >
-                    <Button variant="outline-danger" disabled={isLoading} onClick={deleteProduct}>Hapus</Button>
+                    <Button
+                        variant="outline-danger"
+                        disabled={isLoading}
+                        onClick={deleteProduct}
+                    >Hapus</Button>
                 </ModalUpdateProduct>
 
                 <PerfectScrollbar>
@@ -142,9 +148,23 @@ function Product(props) {
                                 <th>Harga</th>
                                 <th>Kuantitas</th>
                                 <th>Terjual</th>
+                                <th style={{ width: "67px" }}></th>
                             </tr>
                         </thead>
                         <tbody>
+                            {!products.length
+                                ?
+                                <>
+                                    <tr>
+                                        <td>#0</td>
+                                        <td>Product could not be found.</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </>
+                                : <></>}
                             {products.map((p, i) =>
                                 <tr style={{ cursor: "pointer" }} key={i} onClick={() => show(p.id)}>
                                     <td>#{p.id}</td>
@@ -152,6 +172,12 @@ function Product(props) {
                                     <td>{p.price}</td>
                                     <td>{p.qty}</td>
                                     <td>{p.selled}</td>
+                                    <td>
+                                        <Button
+                                            size="sm"
+                                            variant="outline-success"
+                                        >Edit</Button>
+                                    </td>
                                 </tr>
                             )}
                         </tbody>

@@ -23,7 +23,7 @@ function Rdn(props) {
         let s = session.get;
 
         if (s('username') === null) {
-            props.history.push('/?_rdn/home');
+            props.history.push('/auth?_rdn/home');
             return;
         }
 
@@ -66,7 +66,7 @@ function Rdn(props) {
     return (
         <Navbar fixed="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Navbar.Brand href="#home">
-                <img src={logo} alt="logo" height="30" style={{ borderRadius: "8px" }} />
+                <img src={logo} alt="logo" height="30" width="30" style={{ borderRadius: "8px" }} />
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">

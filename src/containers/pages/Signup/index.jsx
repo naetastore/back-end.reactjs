@@ -2,13 +2,11 @@ import React, { useState, useEffect } from 'react';
 import './index.css';
 import axios from 'axios';
 import { REST } from '../../../config/REST';
-import store from '../../../config/redux/store';
-import session from '../../../config/session';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 
-function Auth(props) {
-    const [data, setData] = useState({ username: '', password: '' });
+function Signup(props) {
+    const [data, setData] = useState({ username: '', email: '', password: '' });
     const [disabled, setDisabled] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [initialized, setInitialized] = useState(false);
@@ -21,7 +19,7 @@ function Auth(props) {
     });
 
     const checkForms = () => {
-        if (data.username && data.password) {
+        if (data.username && data.email && data.password) {
             setDisabled(false);
         } else {
             setDisabled(true);
@@ -35,7 +33,7 @@ function Auth(props) {
 
         setData(newData);
 
-        if (newData.username && newData.password) {
+        if (newData.username && newData.email && newData.password) {
             setDisabled(false);
         } else {
             setDisabled(true);
@@ -47,37 +45,19 @@ function Auth(props) {
 
         setIsLoading(true);
 
-        axios.get(`${REST.server.url}api/users`, { params: data })
+        axios.post(`${REST.server.url}api/users`, data)
             .then(res => {
+                console.log(res);
+
                 setIsLoading(false);
-
-                if (res.data.role_id > 1) return;
-
-                res.data['password'] = data.password;
-                setUser(res.data);
-
-                redirect();
             }).catch(err => {
-                console.log(err.response);
+                console.error(err.response);
                 const errorMessage = err.response.data.message;
+
                 setErrorMessage(errorMessage);
+
                 setIsLoading(false);
             });
-    }
-
-    const setUser = data => {
-        session.set(data);
-        store.dispatch({ type: 'SET_USERDATA', data });
-    }
-
-    const redirect = () => {
-        let search = props.location.search;
-        if (!search) {
-            props.history.push('/_rdn/home');
-        } else {
-            search = search.replace('?', '');
-            props.history.push(search);
-        }
     }
 
     return (
@@ -93,14 +73,22 @@ function Auth(props) {
                                 }}
                             >{errorMessage}</div>
                             <Form onSubmit={submit} style={{ width: "50%" }}>
-                                <h4>Welcome back!</h4>
-                                <h6 className="font-weight-light">Happy to see you again!</h6>
+                                <h4>New here?</h4>
+                                <h6 className="font-weight-light">Join us today! It takes only few steps</h6>
                                 <Form.Group controlId="username" className="pt-3">
                                     <Form.Label>Username</Form.Label>
                                     <Form.Control
                                         onChange={change}
                                         type="text"
                                         placeholder="Username"
+                                    />
+                                </Form.Group>
+                                <Form.Group controlId="email">
+                                    <Form.Label>Email</Form.Label>
+                                    <Form.Control
+                                        onChange={change}
+                                        type="email"
+                                        placeholder="Email"
                                     />
                                 </Form.Group>
                                 <Form.Group controlId="password">
@@ -117,10 +105,10 @@ function Auth(props) {
                                     style={{ width: "100%" }}
                                     disabled={disabled | isLoading}
                                 >
-                                    {isLoading ? 'wait..' : 'Login'}
+                                    {isLoading ? 'wait..' : 'Sign Up'}
                                 </Button>
                                 <div className="text-center mt-4 font-weight-light">
-                                    Don't have an account? <NavLink to="/signup" className="text-primary">Create</NavLink>
+                                    Already have an account? <NavLink to="/auth" className="text-primary">Login</NavLink>
                                 </div>
                             </Form>
                         </Col>
@@ -135,4 +123,4 @@ function Auth(props) {
     );
 }
 
-export default Auth;
+export default Signup;

@@ -91,11 +91,16 @@ function Category(props) {
     }
 
     return (
-        <Row className="-p_ mx-auto">
+        <Row className="p_ mt-3 mx-auto">
             <Col md={10}>
-                <Button variant="primary" className="mb-3" onClick={() => setModalShow(true)}>
-                    Tambah Data
-                </Button>
+                <h2>Katalog</h2>
+                <p>Says something here.</p>
+
+                <Button
+                    variant="outline-primary"
+                    className="my-3"
+                    onClick={() => setModalShow(true)}
+                >+ Katalog</Button>
 
                 <AddCategory
                     onSubmit={add} show={modalShow} onHide={() => setModalShow(false)} />
@@ -114,32 +119,46 @@ function Category(props) {
                     >Hapus</Button>
                 </UpdateCategory>
 
-                <Table striped bordered hover>
-                    <thead>
-                        <tr>
-                            <th style={{ width: "80px" }}>ID</th>
-                            <th>Nama</th>
-                            <th>Description</th>
-                            <th style={{ width: "40px" }}></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {categories.map((c, i) =>
-                            <tr style={{ cursor: "pointer" }} key={i} onClick={() => show(c.id)}>
-                                <td>#{c.id}</td>
-                                <td>{c.name}</td>
-                                <td>{c.description}</td>
-                                <td>
-                                    <Button
-                                        size="sm"
-                                        variant="outline-success"
-                                        onClick={() => show(c.id)}
-                                    >Edit</Button>
-                                </td>
-                            </tr>
-                        )}
-                    </tbody>
-                </Table>
+                <Row>
+                    <Col md={12}>
+                        <Table striped bordered hover>
+                            <thead>
+                                <tr>
+                                    <th style={{ width: "70px" }}>ID</th>
+                                    <th>Nama</th>
+                                    <th>Description</th>
+                                    <th style={{ width: "67px" }}></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {!categories.length
+                                    ?
+                                    <>
+                                        <tr>
+                                            <td>#0</td>
+                                            <td>Category could not be found.</td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </>
+                                    : <></>}
+                                {categories.map((c, i) =>
+                                    <tr style={{ cursor: "pointer" }} key={i} onClick={() => show(c.id)}>
+                                        <td>#{c.id}</td>
+                                        <td>{c.name}</td>
+                                        <td>{c.description}</td>
+                                        <td>
+                                            <Button
+                                                size="sm"
+                                                variant="outline-success"
+                                            >Edit</Button>
+                                        </td>
+                                    </tr>
+                                )}
+                            </tbody>
+                        </Table>
+                    </Col>
+                </Row>
             </Col>
         </Row>
     );

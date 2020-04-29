@@ -63,12 +63,14 @@ class UpdateUser extends React.Component {
                     </Modal.Body>
                     <Modal.Footer className="p-1">
                         <Button
+                            size="sm"
                             variant="outline-secondary"
                             disabled={this.props.isloading === 'true' ? true : this.state.disabled}
                             onClick={this.props.onHide}
                         >Batalkan</Button>
                         {this.props.children}
                         <Button
+                            size="sm"
                             variant="success"
                             disabled={this.props.isloading === 'true' ? true : this.state.disabled}
                             onClick={() => this.props.onSubmit(this.state.data)}

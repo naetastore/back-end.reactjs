@@ -1,0 +1,92 @@
+{
+    "about": {
+        "description": [
+            "Iam Here -> Jl. Depati Agung Sumber Agung, Buay Madang OKU Timur, Sumatera Selatan.",
+            "Information Management AMIK AKMI Baturaja Student."
+        ],
+        "items": [
+            "Information Management",
+            "Blogger"
+        ]
+    },
+    "services": {
+        "title": "Work Space",
+        "description": "This site will give you information about software developers like cycle",
+        "data": [
+            {
+                "name": "Developers Motivation",
+                "description": "Software developers motivation for change the world",
+                "items": [
+                    "Mobile Development",
+                    "UI/UX Design"
+                ]
+            },
+            {
+                "name": "Programming Trick",
+                "description": "Share about pogramming trick, and how to make beautiful code",
+                "items": [
+                    "Design Solution",
+                    "Computational Thinking",
+                    "Abstraction"
+                ]
+            },
+            {
+                "name": "Developer Jokes",
+                "description": "Its about joke of the developers and my jokes actualy",
+                "items": [
+                    "Analysis & Consulting"
+                ]
+            }
+        ]
+    },
+    "processes": {
+        "title": "Step by step",
+        "description": "Sed feugiat porttitor nunc, non dignissim ipsum vestibulum in. Donec in blandit dolor. Vivamus a fringilla lorem, vel faucibus ante. Nunc ullamcorper, justo a iaculis elementum, enim orci viverra eros, fringilla porttitor lorem eros vel odio.",
+        "steps": [
+            {
+                "step": "Step 1. Analisys",
+                "description": "Sed feugiat porttitor nunc, non dignissim ipsum vestibulum in. Donec in blandit dolor. Vivamus a fringilla lorem, vel faucibus ante."
+            },
+            {
+                "step": "Step 2. Creative concept",
+                "description": "We strive to embrace and drive change in our industry which allows us to keep our clients relevant."
+            },
+            {
+                "step": "Step 3. Production",
+                "description": "We strive to embrace and drive change in our industry which allows us to keep our clients relevant."
+            },
+            {
+                "step": "Step 4. Happy client",
+                "description": "We strive to embrace and drive change in our industry which allows us to keep our clients relevant."
+            }
+        ]
+    },
+    "projects": {
+        "description": [
+            "Sed feugiat porttitor nunc, non dignissim ipsum vestibulum in. Donec in blandit dolor. Vivamus a fringilla lorem, vel faucibus ante. Nunc ullamcorper, justo a iaculis elementum, enim orci viverra eros, fringilla porttitor lorem eros vel odio.",
+            "In rutrum tellus vitae blandit lacinia. Phasellus eget sapien odio. Phasellus eget sapien odio. Vivamus at risus quis leo tincidunt scelerisque non et erat."
+        ]
+    },
+    "howWeWork": {
+        "title": "Do all the best",
+        "description": "Sed feugiat porttitor nunc, non dignissim ipsum vestibulum in. Donec in blandit dolor. Vivamus a fringilla lorem, vel faucibus ante. Nunc ullamcorper, justo a iaculis elementum, enim orci viverra eros, fringilla porttitor lorem eros vel odio.",
+        "items": [
+            {
+                "name": "Agency Search",
+                "description": "Quisque rhoncus euismod pulvinar. Nulla non arcu at lectus. Vestibulum ipsum vestibulum velit."
+            },
+            {
+                "name": "Management & Marketing",
+                "description": "Quisque rhoncus euismod pulvinar. Nulla non arcu at lectus. Vestibulum ipsum vestibulum velit."
+            },
+            {
+                "name": "Coaching & Planning",
+                "description": "Quisque rhoncus euismod pulvinar. Nulla non arcu at lectus. Vestibulum ipsum vestibulum velit."
+            },
+            {
+                "name": "Consulation Services",
+                "description": "Quisque rhoncus euismod pulvinar. Nulla non arcu at lectus. Vestibulum ipsum vestibulum velit."
+            }
+        ]
+    }
+}

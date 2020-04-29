@@ -11,7 +11,7 @@ function Home(props) {
 
     const [initialized, setInitialized] = useState(false);
     const [basic, setBasic] = useState({ product: 0, order: 0, selled: 0 });
-    const [product, setProduct] = useState({ items: 0, stocks: 0, out_of_stock: 0 });
+    const [product, setProduct] = useState({ items: 0, stocks: 0, out_of_stock: 0, not_ready: 0 });
     const [order, setOrder] = useState([]);
 
     useEffect(() => {

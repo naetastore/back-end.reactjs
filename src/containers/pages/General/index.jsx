@@ -103,9 +103,9 @@ function General(props) {
 
     return (
         <>
-            <Row className="-p_ mx-auto">
+            <Row className="-p mx-auto">
                 <Col md={10} id="style">
-                    <h1 className="page-heading">Kategori Umum</h1>
+                    <h1 className="page-heading">Kategori</h1>
 
                     <h2>Style</h2>
                     <p>Says something here.</p>
@@ -138,27 +138,50 @@ function General(props) {
                         onHide={() => setModalShowDetails(false)}
                         isloading={isLoading.toString()}
                     >
-                        <Button variant="outline-danger" disabled={isLoading} onClick={deleteGeneral}>Hapus</Button>
+                        <Button
+                            size="sm"
+                            variant="outline-danger"
+                            disabled={isLoading}
+                            onClick={deleteGeneral}
+                        >Hapus</Button>
                     </UpdateGeneral>
 
-                    <h2 className="mt-5">Tabel</h2>
-                    <p>Says something here.
-                        <Button size="sm" variant="outline-primary" className="ml-2" onClick={() => setModalShow(true)}>
-                            Tambah Data
-                        </Button>
+                    <h4 className="mt-4">Tabel</h4>
+                    <p>
+                        Says something here.
                     </p>
-                    <Table striped bordered hover className="mt-3">
+
+                    <Button
+                        className="my-3"
+                        variant="outline-primary"
+                        onClick={() => setModalShow(true)}
+                    >+ Style</Button>
+
+                    <Table striped bordered hover>
                         <thead>
                             <tr>
-                                <th style={{ width: "80px" }}>ID</th>
+                                <th style={{ width: "70px" }}>ID</th>
                                 <th>Nama</th>
                                 <th>Description</th>
-                                <th>Start Price</th>
-                                <th>High Price</th>
-                                <th style={{ width: "40px" }}></th>
+                                <th style={{ width: "120px" }}>Start Price</th>
+                                <th style={{ width: "120px" }}>High Price</th>
+                                <th style={{ width: "67px" }}></th>
                             </tr>
                         </thead>
                         <tbody>
+                            {!generals.length
+                                ?
+                                <>
+                                    <tr>
+                                        <td>#0</td>
+                                        <td>Category could not be found.</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </>
+                                : <></>}
                             {generals.map((g, i) =>
                                 <tr style={{ cursor: "pointer" }} key={i} onClick={() => show(g.id)}>
                                     <td>#{g.id}</td>
@@ -170,7 +193,6 @@ function General(props) {
                                         <Button
                                             size="sm"
                                             variant="outline-success"
-                                            onClick={() => show(g.id)}
                                         >Edit</Button>
                                     </td>
                                 </tr>

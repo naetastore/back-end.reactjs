@@ -112,10 +112,12 @@ class AddGeneral extends React.Component {
                     </Modal.Body>
                     <Modal.Footer className="p-1">
                         <Button
+                            size="sm"
                             variant="outline-secondary"
                             onClick={this.props.onHide}
                         >Batalkan</Button>
                         <Button
+                            size="sm"
                             disabled={this.state.disabled}
                             onClick={this.submit}
                         >Simpan</Button>
