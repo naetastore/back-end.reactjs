@@ -1,6 +1,10 @@
 const globalState = {
     userData: {},
-    pageLoading: false
+    pageLoading: false,
+    progressLoaded: 0,
+    globals: [],
+    categories: [],
+    posts: []
 }
 
 const rootReducer = (state = globalState, action) => {
@@ -14,6 +18,26 @@ const rootReducer = (state = globalState, action) => {
             return {
                 ...state,
                 pageLoading: action.data
+            }
+        case 'SET_PROGRESS':
+            return {
+                ...state,
+                progressLoaded: action.data
+            }
+        case 'SET_GLOBALS':
+            return {
+                ...state,
+                globals: action.data
+            }
+        case 'SET_CATEGORIES':
+            return {
+                ...state,
+                categories: action.data
+            }
+        case 'SET_POSTS':
+            return {
+                ...state,
+                posts: action.data
             }
 
         default:

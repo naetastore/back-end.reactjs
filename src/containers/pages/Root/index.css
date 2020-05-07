@@ -30,3 +30,12 @@
         font-size: 1.78571rem !important;
     }
 }
+
+.block-bio>div {
+    border-right: solid 1px transparent;
+    border-color: rgba(255, 255, 255, 0.3);    
+}
+.block-bio>div:last-child {
+    border-right: unset;
+    border-color: unset;
+}

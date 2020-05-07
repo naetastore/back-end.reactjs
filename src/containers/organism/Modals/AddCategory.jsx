@@ -9,7 +9,7 @@ class AddCategory extends React.Component {
         data: {
             name: '',
             description: '',
-            global_id: 0
+            global_id: '0'
         },
         general: [],
         disabled: true,
@@ -21,10 +21,23 @@ class AddCategory extends React.Component {
     }
 
     getDataGeneral = () => {
-        axios.get(`${REST.server.url}api/general`)
-            .then(res => {
-                this.setState({ general: res.data.general, initialized: true });
-            }).catch(err => console.error(err));
+        switch (this.props.restserver) {
+            case 'naetastore':
+                axios.get(`${REST.server.naetastore}api/general`)
+                    .then(res => {
+                        this.setState({ general: res.data.general, initialized: true });
+                    }).catch(err => console.error(err));
+                break;
+            case 'andinaeta':
+                axios.get(`${REST.server.andinaeta}api/generals`)
+                    .then(res => {
+                        this.setState({ general: res.data, initialized: true });
+                    }).catch(err => console.error(err));
+                break;
+            default:
+                break;
+        }
+
     }
 
     initState = () => {

@@ -28,18 +28,15 @@ class AddUser extends React.Component {
 
         this.setState({ data });
 
-        if (
-            data.username.length > 0 &&
-            data.password.length > 0
-        ) {
-            this.setState({ disabled: false });
-        } else {
+        if (Object.values(data).includes('')) {
             this.setState({ disabled: true });
+        } else {
+            this.setState({ disabled: false });
         }
     }
 
     submit = () => {
-        axios.post(`${REST.server.url}api/users`, { username: this.state.data.username })
+        axios.post(`${REST.server.naetastore}api/users`, { username: this.state.data.username })
             .then(res => {
                 this.props.onSubmit(this.state.data);
                 this.initState();

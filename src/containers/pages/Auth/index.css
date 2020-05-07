@@ -20,11 +20,6 @@
     padding: 0;
 }
 
-.login-half-bg {
-    background: url("../../../assets/img/background/937x768.svg");
-    background-size: cover;
-}
-
 .page-body-wrapper {
     min-height: calc(100vh - 60px);
     display: -webkit-flex;

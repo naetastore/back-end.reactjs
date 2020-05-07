@@ -1,0 +1,49 @@
+{
+    "title": "Document",
+    "brand_name": "AN.IO",
+    "copyright": "AN",
+    "bio": {
+        "name": "Andi Naeta",
+        "role": "AKMI Baturaja (IM) Student.",
+        "links": [
+            {
+                "head": "Ikuti Saya di Facebook",
+                "public": "@mikorlk4328",
+                "icon": "icon-facebook",
+                "url": "https://facebook.com/mikorlk4328"
+            },
+            {
+                "head": "Ikuti Saya di GitHub",
+                "public": "@andinaeta",
+                "icon": "icon-github",
+                "url": "https://github.com/andinaeta"
+            }
+        ]
+    },
+    "contacts": [
+        {
+            "title": "Alamat",
+            "description": "Jl. Depati Agung Sumber Agung, Buay Madang OKU Timur, Sumatera Selatan, 32161"
+        },
+        {
+            "title": "Telepon",
+            "description": "+62 8827 667 2905"
+        },
+        {
+            "title": "Email",
+            "description": "andinaeta@gmail.com"
+        }
+    ],
+    "production": false,
+    "count_visitor": false,
+    "rest": {
+        "server": {
+            "naetastore": "https://naeta-rest-server.000webhostapp.com/",
+            "andinaeta": ""
+        }
+    },
+    "default_route": {
+        "admin": "/_rdn/administrator",
+        "member": "/_rdn"
+    }
+}

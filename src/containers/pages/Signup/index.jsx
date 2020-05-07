@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './index.css';
-import axios from 'axios';
-import { REST } from '../../../config/REST';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
+import config from '../../../config.json';
+import dataJSON from '../../../data.json';
+import { api } from '../../../services/api';
+import AlertOrg from '../../organism/Alert';
 
 function Signup(props) {
     const [data, setData] = useState({ username: '', email: '', password: '' });
@@ -40,24 +42,46 @@ function Signup(props) {
         }
     }
 
-    const submit = event => {
+    const submit = async event => {
         event.preventDefault();
 
         setIsLoading(true);
 
-        axios.post(`${REST.server.url}api/users`, data)
-            .then(res => {
-                console.log(res);
+        try {
+            setIsLoading(false);
+            const res = await api.post('users', data);
+            redirect(res.data.user.role_id);
+            return;
+        } catch (err) {
+            const errorMessage = err.response.data.message;
+            setErrorMessage(errorMessage);
+            setIsLoading(false);
+        }
+    }
 
-                setIsLoading(false);
-            }).catch(err => {
-                console.error(err.response);
-                const errorMessage = err.response.data.message;
+    const redirect = role => {
+        const search = props.location.search;
+        if (!search) {
+            if (role > 1) {
+                props.history.push(config.default_route.member);
+            } else {
+                props.history.push(config.default_route.admin);
+            }
+        } else {
+            props.history.push(search.replace('?', ''));
+        }
+    }
 
-                setErrorMessage(errorMessage);
-
-                setIsLoading(false);
-            });
+    function ShowError() {
+        if (errorMessage) {
+            return (
+                <AlertOrg variant="danger" onHide={() => setErrorMessage('')}>
+                    {errorMessage}
+                </AlertOrg>
+            );
+        } else {
+            return true;
+        }
     }
 
     return (
@@ -66,21 +90,20 @@ function Signup(props) {
                 <div className="content-wrapper d-flex mb-0 align-items-stretch auth auth-img-bg">
                     <Row className="flex-grow">
                         <Col lg={6} className="d-flex m-0 align-items-center justify-content-center">
-                            <div className="text-danger"
-                                style={{
-                                    position: "absolute",
-                                    bottom: "0"
-                                }}
-                            >{errorMessage}</div>
+                            <ShowError />
                             <Form onSubmit={submit} style={{ width: "50%" }}>
-                                <h4>New here?</h4>
-                                <h6 className="font-weight-light">Join us today! It takes only few steps</h6>
+                                <h4>{dataJSON.signup.title}</h4>
+                                <h6 className="font-weight-light">
+                                    {dataJSON.signup.description}
+                                </h6>
                                 <Form.Group controlId="username" className="pt-3">
-                                    <Form.Label>Username</Form.Label>
+                                    <Form.Label>Nama Pengguna</Form.Label>
                                     <Form.Control
+                                        autoFocus="on"
+                                        autoComplete="off"
                                         onChange={change}
                                         type="text"
-                                        placeholder="Username"
+                                        placeholder="Nama pengguna"
                                     />
                                 </Form.Group>
                                 <Form.Group controlId="email">
@@ -92,11 +115,11 @@ function Signup(props) {
                                     />
                                 </Form.Group>
                                 <Form.Group controlId="password">
-                                    <Form.Label>Password</Form.Label>
+                                    <Form.Label>Kata Sandi</Form.Label>
                                     <Form.Control
                                         onChange={change}
                                         type="password"
-                                        placeholder="Password"
+                                        placeholder="5 karakter atau lebih"
                                     />
                                 </Form.Group>
                                 <Button
@@ -105,16 +128,21 @@ function Signup(props) {
                                     style={{ width: "100%" }}
                                     disabled={disabled | isLoading}
                                 >
-                                    {isLoading ? 'wait..' : 'Sign Up'}
+                                    {isLoading ? 'tunggu..' : 'Buat Akun'}
                                 </Button>
                                 <div className="text-center mt-4 font-weight-light">
-                                    Already have an account? <NavLink to="/auth" className="text-primary">Login</NavLink>
+                                    Sudah punya akun? {'\r\n'}
+                                    <NavLink
+                                        to="/auth"
+                                        className="text-primary"
+                                    >Log In</NavLink>
                                 </div>
                             </Form>
                         </Col>
-                        <Col lg={6} className="login-half-bg d-flex m-0 flex-row">
+                        <Col lg={6} className={dataJSON.signup.bgClassName + " d-flex m-0 flex-row"}>
                             <p className="text-white font-weight-medium text-center flex-grow align-self-end">
-                                Copyright &copy; {new Date().getFullYear()} All rights reserved.</p>
+                                {config.copyright} {new Date().getFullYear()} &copy; All Rights Reserved.
+                            </p>
                         </Col>
                     </Row>
                 </div>

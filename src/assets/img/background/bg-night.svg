@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X7 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="21.6747cm" height="12.192cm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 21675 12192"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil1 {fill:#1C1D26}
+    .fil2 {fill:#222239}
+    .fil6 {fill:url(#id0)}
+    .fil0 {fill:url(#id1)}
+    .fil3 {fill:url(#id2)}
+    .fil8 {fill:url(#id3)}
+    .fil7 {fill:url(#id4)}
+    .fil5 {fill:url(#id5)}
+    .fil4 {fill:url(#id6)}
+   ]]>
+  </style>
+  <linearGradient id="id0" gradientUnits="userSpaceOnUse" x1="17443.7" y1="10776.5" x2="18165.6" y2="10424.5">
+   <stop offset="0" style="stop-opacity:1; stop-color:#07D6D6"/>
+   <stop offset="0.419608" style="stop-opacity:1; stop-color:#0792C4"/>
+   <stop offset="1" style="stop-opacity:1; stop-color:#064DB2"/>
+  </linearGradient>
+  <linearGradient id="id1" gradientUnits="userSpaceOnUse" x1="-0" y1="6104.47" x2="21674.7" y2="6104.47">
+   <stop offset="0" style="stop-opacity:1; stop-color:#0CB8E8"/>
+   <stop offset="1" style="stop-opacity:1; stop-color:#064AB0"/>
+  </linearGradient>
+  <linearGradient id="id2" gradientUnits="userSpaceOnUse" x1="6910.4" y1="12252.2" x2="10364.8" y2="9922.12">
+   <stop offset="0" style="stop-opacity:1; stop-color:#044F85"/>
+   <stop offset="0.74902" style="stop-opacity:1; stop-color:#0C849F"/>
+   <stop offset="1" style="stop-opacity:1; stop-color:#14BABA"/>
+  </linearGradient>
+  <linearGradient id="id3" gradientUnits="userSpaceOnUse" x1="7568.02" y1="12235.1" x2="8210.8" y2="11785">
+   <stop offset="0" style="stop-opacity:1; stop-color:#0F8094"/>
+   <stop offset="1" style="stop-opacity:0.309804; stop-color:#08F2F2"/>
+  </linearGradient>
+  <linearGradient id="id4" gradientUnits="userSpaceOnUse" x1="4930.34" y1="10718.8" x2="6396.58" y2="10213.9">
+   <stop offset="0" style="stop-opacity:1; stop-color:#076787"/>
+   <stop offset="1" style="stop-opacity:1; stop-color:#0B9AA1"/>
+  </linearGradient>
+  <linearGradient id="id5" gradientUnits="userSpaceOnUse" xlink:href="#id0" x1="15734.8" y1="8844.62" x2="15930.6" y2="8749.13">
+  </linearGradient>
+  <linearGradient id="id6" gradientUnits="userSpaceOnUse" xlink:href="#id0" x1="14240.5" y1="10919.4" x2="15088.1" y2="10506">
+  </linearGradient>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <rect class="fil0" y="8" width="21675" height="12192"/>
+  <path class="fil1" d="M0 10439c5309,-601 14156,-2489 21675,-4335l0 6096 -21675 0 0 -1761z"/>
+  <path class="fil2" d="M0 12200l11377 0c-3113,-2529 -6713,-3161 -11377,-626l0 626z"/>
+  <path class="fil1" d="M9936 12200l-2404 0c-173,-104 -558,-482 -811,-643 -1423,-909 -1047,-802 -1934,-1562 2004,122 3506,814 5149,2205z"/>
+  <path class="fil3" d="M11377 12200l-2405 0c-173,-104 -557,-482 -810,-643 -307,-196 -1130,-520 -1355,-618 -685,-299 -664,-266 -909,-965 2004,122 3836,835 5479,2226z"/>
+  <path class="fil2" d="M17425 9642l1727 -66c558,-22 1016,457 1016,1016l0 542c0,558 -458,1016 -1016,1016l-1535 0c-559,0 -1016,-458 -1016,-1016l0 -390c0,-559 399,-1086 824,-1102z"/>
+  <circle class="fil1" cx="17805" cy="10600" r="406"/>
+  <circle class="fil4" cx="14664" cy="10713" r="476"/>
+  <circle class="fil5" cx="15833" cy="8797" r="110"/>
+  <path class="fil6" d="M18029 10261c27,18 52,39 75,63 -213,124 -450,230 -702,325 -2,-16 -3,-32 -3,-49 0,-22 2,-44 5,-66 265,-104 467,-193 625,-273zm163 213c9,29 16,60 18,91 -209,124 -442,230 -689,325 -27,-26 -50,-56 -69,-88 330,-128 564,-234 740,-328zm-24 310c-67,132 -204,223 -363,223 -37,0 -73,-5 -107,-15 189,-76 343,-145 470,-208zm-655 -466c70,-72 166,-119 273,-124 -88,44 -179,84 -273,124z"/>
+  <path class="fil7" d="M6540 10034c-779,-97 -1129,-88 -1753,-39 58,627 511,997 903,978 338,-17 730,-185 850,-939z"/>
+  <path class="fil8" d="M7358 11828c446,-42 805,74 1063,372 -333,-188 -688,-312 -1063,-372z"/>
+ </g>
+</svg>

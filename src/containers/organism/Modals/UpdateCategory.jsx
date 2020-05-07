@@ -9,7 +9,7 @@ class UpdateCategory extends React.Component {
         data: {
             name: '',
             description: '',
-            global_id: 0
+            global_id: '0'
         },
         disabled: false,
         general: [],
@@ -27,15 +27,33 @@ class UpdateCategory extends React.Component {
     }
 
     getData = () => {
-        axios.get(`${REST.server.url}api/general`)
-            .then(res => {
-                let data = { ...this.props.data };
+        switch (this.props.restserver) {
+            case 'naetastore':
+                axios.get(`${REST.server.naetastore}api/general`)
+                    .then(res => {
+                        let data = { ...this.props.data };
 
-                const general = res.data.general.filter(g => g.id !== data.global_id);
-                data['global_name'] = res.data.general.find(g => g.id === data.global_id)['name'];
+                        const general = res.data.general.filter(g => g.id !== data.global_id);
+                        data['global_name'] = res.data.general.find(g => g.id === data.global_id)['name'];
 
-                this.setState({ general, data });
-            }).catch(err => console.error(err));
+                        this.setState({ general, data });
+                    }).catch(err => console.error(err));
+                break;
+            case 'andinaeta':
+                axios.get(`${REST.server.andinaeta}api/generals`)
+                    .then(res => {
+                        let data = { ...this.props.data };
+
+                        const general = res.data.filter(g => g.id !== data.global_id);
+                        data['global_name'] = res.data.find(g => g.id === data.global_id)['name'];
+
+                        this.setState({ general, data });
+                    }).catch(err => console.error(err));
+                break;
+
+            default:
+                break;
+        }
     }
 
     changeValue = e => {
@@ -106,7 +124,7 @@ class UpdateCategory extends React.Component {
                     <Modal.Footer className="p-1">
                         <Button
                             variant="outline-secondary"
-                            disabled={this.props.isloading === 'true' ? true : this.state.disabled}
+                            disabled={this.props.isloading === 'true' ? true : false}
                             onClick={this.props.onHide}
                         >Batalkan</Button>
                         {this.props.children}

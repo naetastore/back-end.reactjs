@@ -47,14 +47,10 @@ class AddGeneral extends React.Component {
 
         this.setState({ data });
 
-        if (
-            data.name.length > 0 &&
-            data.description.length > 0 &&
-            data.image !== null
-        ) {
-            this.setState({ disabled: false });
-        } else {
+        if (Object.values(data).includes('') | Object.values(data).includes(null)) {
             this.setState({ disabled: true });
+        } else {
+            this.setState({ disabled: false });
         }
     }
 

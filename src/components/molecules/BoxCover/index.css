@@ -1,0 +1,43 @@
+.category-post {
+    position: relative;
+    text-align: center;
+    cursor: pointer;
+}
+
+.category-post>img {
+    max-width: 100%;
+}
+
+.category-post>.details {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    background: rgba(34, 34, 34, 0.8);
+    color: #fff;
+    transition: all 0.3s linear;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.category-post>.details>.text>a {
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.category-post>.details>.text>.border-line {
+    margin: 10px auto;
+    background: #fff;
+    width: 40%;
+    height: 1px;
+}
+
+.category-post>.details:hover{
+    opacity: .6;
+}
+
+.post-tag a.active {
+    color: #61dafb;
+}

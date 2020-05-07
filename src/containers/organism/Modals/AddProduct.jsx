@@ -9,12 +9,12 @@ class AddProduct extends React.Component {
     state = {
         product: {
             name: '',
-            price: 0,
-            qty: 0,
+            price: '0',
+            qty: '0',
             image: null,
             description: '',
-            category_id: 0,
-            suggested: 0,
+            category_id: '0',
+            suggested: '0',
             is_ready: 1
         },
         preview: null,
@@ -46,7 +46,7 @@ class AddProduct extends React.Component {
     }
 
     getDataCategory = () => {
-        axios.get(`${REST.server.url}api/category`)
+        axios.get(`${REST.server.naetastore}api/category`)
             .then(res => {
                 this.setState({ category: res.data.category, initialized: true });
             }).catch(err => console.error(err));

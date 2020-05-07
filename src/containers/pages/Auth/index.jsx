@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './index.css';
-import axios from 'axios';
-import { REST } from '../../../config/REST';
 import store from '../../../config/redux/store';
 import session from '../../../config/session';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
+import config from '../../../config.json';
+import dataJSON from '../../../data.json';
+import { api } from '../../../services/api';
+import AlertOrg from '../../organism/Alert';
 
 function Auth(props) {
     const [data, setData] = useState({ username: '', password: '' });
@@ -42,27 +44,25 @@ function Auth(props) {
         }
     }
 
-    const submit = event => {
+    const submit = async event => {
         event.preventDefault();
 
         setIsLoading(true);
 
-        axios.get(`${REST.server.url}api/users`, { params: data })
-            .then(res => {
-                setIsLoading(false);
+        try {
+            const res = await api.get('users', data);
+            setIsLoading(false);
 
-                if (res.data.role_id > 1) return;
+            res.data['password'] = data.password;
+            setUser(res.data);
 
-                res.data['password'] = data.password;
-                setUser(res.data);
-
-                redirect();
-            }).catch(err => {
-                console.log(err.response);
-                const errorMessage = err.response.data.message;
-                setErrorMessage(errorMessage);
-                setIsLoading(false);
-            });
+            redirect(res.data.role_id);
+            return;
+        } catch (err) {
+            const errorMessage = err.response.data.message;
+            setErrorMessage(errorMessage);
+            setIsLoading(false);
+        }
     }
 
     const setUser = data => {
@@ -70,13 +70,29 @@ function Auth(props) {
         store.dispatch({ type: 'SET_USERDATA', data });
     }
 
-    const redirect = () => {
-        let search = props.location.search;
+    const redirect = role => {
         if (!search) {
-            props.history.push('/_rdn/home');
+            if (role > 1) {
+                props.history.push(config.default_route.member);
+            } else {
+                props.history.push(config.default_route.admin);
+            }
         } else {
-            search = search.replace('?', '');
-            props.history.push(search);
+            props.history.push(search.replace('?', ''));
+        }
+    }
+
+    const search = props.location.search;
+
+    function ShowError() {
+        if (errorMessage) {
+            return (
+                <AlertOrg variant="danger" onHide={() => setErrorMessage('')}>
+                    {errorMessage}
+                </AlertOrg>
+            );
+        } else {
+            return false;
         }
     }
 
@@ -86,29 +102,27 @@ function Auth(props) {
                 <div className="content-wrapper d-flex mb-0 align-items-stretch auth auth-img-bg">
                     <Row className="flex-grow">
                         <Col lg={6} className="d-flex m-0 align-items-center justify-content-center">
-                            <div className="text-danger"
-                                style={{
-                                    position: "absolute",
-                                    bottom: "0"
-                                }}
-                            >{errorMessage}</div>
+                            <ShowError />
                             <Form onSubmit={submit} style={{ width: "50%" }}>
-                                <h4>Welcome back!</h4>
-                                <h6 className="font-weight-light">Happy to see you again!</h6>
+                                <h4>{dataJSON.auth.title}</h4>
+                                <h6 className="font-weight-light">
+                                    {dataJSON.auth.description}
+                                </h6>
                                 <Form.Group controlId="username" className="pt-3">
-                                    <Form.Label>Username</Form.Label>
+                                    <Form.Label>Nama Pengguna</Form.Label>
                                     <Form.Control
+                                        autoComplete="off"
                                         onChange={change}
                                         type="text"
-                                        placeholder="Username"
+                                        placeholder="Nama pengguna"
                                     />
                                 </Form.Group>
                                 <Form.Group controlId="password">
-                                    <Form.Label>Password</Form.Label>
+                                    <Form.Label>Kata Sandi</Form.Label>
                                     <Form.Control
                                         onChange={change}
                                         type="password"
-                                        placeholder="Password"
+                                        placeholder="Kata sandi"
                                     />
                                 </Form.Group>
                                 <Button
@@ -117,16 +131,21 @@ function Auth(props) {
                                     style={{ width: "100%" }}
                                     disabled={disabled | isLoading}
                                 >
-                                    {isLoading ? 'wait..' : 'Login'}
+                                    {isLoading ? 'tunngu..' : 'Lanjutkan'}
                                 </Button>
                                 <div className="text-center mt-4 font-weight-light">
-                                    Don't have an account? <NavLink to="/signup" className="text-primary">Create</NavLink>
+                                    Belum punya akun? {'\r\n'}
+                                    <NavLink
+                                        to={search ? `/signup${search}` : "/signup"}
+                                        className="text-primary"
+                                    >Buat Akun</NavLink>
                                 </div>
                             </Form>
                         </Col>
-                        <Col lg={6} className="login-half-bg d-flex m-0 flex-row">
-                            <p className="text-white font-weight-medium text-center flex-grow align-self-end">
-                                Copyright &copy; {new Date().getFullYear()} All rights reserved.</p>
+                        <Col lg={6} className={dataJSON.auth.bgClassName + " bg-img-hero d-flex m-0 flex-row"}>
+                            <p className="font-weight-medium text-center flex-grow align-self-end">
+                                {config.copyright} {new Date().getFullYear()} &copy; All Rights Reserved.
+                            </p>
                         </Col>
                     </Row>
                 </div>

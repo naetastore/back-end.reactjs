@@ -24,7 +24,7 @@ class UpdateProduct extends React.Component {
     }
 
     getData = () => {
-        axios.get(`${REST.server.url}api/category`)
+        axios.get(`${REST.server.naetastore}api/category`)
             .then(res => {
                 let product = { ...this.props.data };
 
@@ -208,7 +208,7 @@ class UpdateProduct extends React.Component {
                     <Modal.Footer>
                         <Button
                             variant="outline-secondary"
-                            disabled={this.props.isloading === 'true' ? true : this.state.disabled}
+                            disabled={this.props.isloading === 'true' ? true : false}
                             onClick={this.props.onHide}
                         >Batalkan</Button>
                         {this.props.children}

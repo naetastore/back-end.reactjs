@@ -1,0 +1,84 @@
+{
+    "navbar": {
+        "bgClassName": "bg-dark"
+    },
+    "footer": {
+        "links": [
+            {
+                "label": "",
+                "url": ""
+            }
+        ],
+        "bgClassName": "bg-dark"
+    },
+    "root": {
+        "jumbotron": {
+            "bgClassName": "bg-dark-v2"
+        },
+        "about": {
+            "description": [
+                "Saya menetap di Belitang, alamat lengkapnya ada di sini ->>> JL. Depati Agung Sumber Agung, Buay Madang OKU Timur, Sumatera Selatan. Mulai pendidikan di sana pada tahun 2004.",
+                "Melanjutkan sampai ke jenjang perkuliahan di AKMi Baturaja."
+            ],
+            "roles": [
+                "Web App Developer",
+                "Student"
+            ]
+        },
+        "quote": {
+            "quote": "Belajar itu mendapatkan pengetahuan, keterampilan yang kita butuhkan dan menggunakan saat dibutuhkan.",
+            "by": "Andi"
+        },
+        "blog": {
+            "title": "Sharing is Caring",
+            "description": [
+                "Mengingat berbagi dengan menulis, menulis dengan berbagi."
+            ]
+        },
+        "project": {
+            "title": "Projects",
+            "description": [
+                "Tugas saya membuat aplikasi berbasis web.",
+                "Saya berfokus di fullstack designer dan masih tahap belajar. Menggunakan bahasa tertentu sesuai dengan masalah yang ada.",
+                "Berikut adalah aplikasi yang telah saya buat"
+            ],
+            "apps": [
+                {
+                    "name": "Basic E-commerce App",
+                    "url": "https://naetastore.github.io"
+                }
+            ]
+        },
+        "callToAction": {
+            "bgClassName": "bg-dark-v2"
+        }
+    },
+    "client": {
+        "register": {
+            "title": "Informasi Kontak",
+            "description": [
+                "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a distribution of letters."
+            ],
+            "bgClassName": "bg-night-v2",
+            "form": {
+                "bgClassName": "bg-linear-gradient-v2"
+            }
+        }
+    },
+    "blog": {
+        "title": "BLog Andi",
+        "description": "Sharing about web programming and others",
+        "bgClassName": "bg-5 bg-dark-v2"
+    },
+    "auth": {
+        "title": "Log In",
+        "description": "Masukan info detail login untuk mengakses akun Anda.",
+        "bgClassName": "bg-night bg-gray-light text-white"
+    },
+    "signup": {
+        "title": "Akun Baru",
+        "description": "Mulai dengan memasukkan nama pengguna Anda di bawah ini.",
+        "bgClassName": "bg-night-v2"
+    },
+    "data": []
+}
