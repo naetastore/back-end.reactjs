@@ -19,6 +19,17 @@ import store from './redux/store';
 import { NavLink } from 'react-router-dom';
 import Blog from '../containers/pages/Blog';
 import Details from '../containers/pages/Blog/Details';
+import { useLocation, HashRouter } from "react-router-dom";
+
+function ScrollToTop() {
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
+
+    return null;
+}
 
 function ShowMenu() {
     const roleId = session.get('role_id');
@@ -189,6 +200,7 @@ function NaetaStorePage(props) {
 function BlogPage(props) {
     return (
         <Fragment>
+            <ScrollToTop />
             <MainMenu {...props}>
                 <ShowMenu />
             </MainMenu>
@@ -201,6 +213,7 @@ function BlogPage(props) {
 function PostDetailPage(props) {
     return (
         <Fragment>
+            <ScrollToTop />
             <MainMenu {...props}>
                 <ShowMenu />
             </MainMenu>
@@ -233,18 +246,20 @@ function Routes() {
 
     return (
         <BrowserRouter>
-            <Route path="/" exact component={HomePage} />
-            <Route path="/auth" component={LoginPage} />
-            <Route path="/signup" component={RegisterPage} />
-            <Route path="/client/register" component={ClientRegisterPage} />
-            <Route path="/_rdn" component={Authorized} />
-            <Route path="/_rdn/dashboard" component={Dashboard} />
-            <Route path="/_rdn/administrator" exact component={AdministratorPage} />
-            <Route path="/_rdn/administrator/andinaeta" exact component={AndiPage} />
-            <Route path="/_rdn/administrator/naetastore" exact component={NaetaStorePage} />
-            <Route path="/_rdn/administrator/order/:entry" exact component={OrderDetail} />
-            <Route path="/blog" exact component={BlogPage} />
-            <Route path="/blog/post/:id" exact component={PostDetailPage} />
+            <HashRouter>
+                <Route path="/" exact component={HomePage} />
+                <Route path="/auth" component={LoginPage} />
+                <Route path="/signup" component={RegisterPage} />
+                <Route path="/client/register" component={ClientRegisterPage} />
+                <Route path="/_rdn" component={Authorized} />
+                <Route path="/_rdn/dashboard" component={Dashboard} />
+                <Route path="/_rdn/administrator" exact component={AdministratorPage} />
+                <Route path="/_rdn/administrator/andinaeta" exact component={AndiPage} />
+                <Route path="/_rdn/administrator/naetastore" exact component={NaetaStorePage} />
+                <Route path="/_rdn/administrator/order/:entry" exact component={OrderDetail} />
+                <Route path="/blog" exact component={BlogPage} />
+                <Route path="/blog/post/:id" exact component={PostDetailPage} />
+            </HashRouter>
 
         </BrowserRouter>
     );
