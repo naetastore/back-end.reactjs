@@ -25,17 +25,14 @@ class NewPost extends React.Component {
             title: '',
             body: '',
             category_id: 0,
-            image: null,
-            image_details: null,
-            body_details: ''
+            image: null
         },
         categories: [],
         isloading: false,
         disabled: true,
         posts: [],
         preview: {
-            image: null,
-            image_details: null
+            image: null
         }
     }
 
@@ -76,8 +73,7 @@ class NewPost extends React.Component {
             data.title.length > 0 &&
             data.body.length > 0 &&
             Number(data.category_id) > 0 &&
-            !Object.values(data).includes(null) &&
-            data.body_details.length > 0
+            !Object.values(data).includes(null)
         ) {
             this.setState({ disabled: false });
         } else {
@@ -97,14 +93,11 @@ class NewPost extends React.Component {
         fd.append('body', data.body);
         fd.append('category_id', data.category_id);
         fd.append('image', data.image);
-        fd.append('image_details', data.image_details);
-        fd.append('body_details', data.body_details);
 
         if (!data.id) {
             this.post(fd);
         } else {
             fd.append('id', data.id);
-            fd.append('details_id', data.details_id);
             this.update(fd);
         }
     }
@@ -125,14 +118,12 @@ class NewPost extends React.Component {
 
     post = async fd => {
         this.setState({ isloading: true });
-        console.log(this.props.progressLoaded)
 
         try {
             const res = await api.post('posts', fd);
             const posts = this.state.posts.concat(res.data);
             this.setState({ isloading: false, posts });
             this.initState();
-            this.setState({ isloading: false });
         } catch (err) {
             this.setState({ isloading: false });
             console.error(err);
@@ -144,13 +135,10 @@ class NewPost extends React.Component {
             title: '',
             body: '',
             category_id: 0,
-            image: null,
-            image_details: null,
-            body_details: ''
+            image: null
         };
         const preview = {
-            image: null,
-            image_details: null
+            image: null
         };
         this.setState({ data, preview, disabled: true });
         this.props.setProgress(0);
@@ -182,13 +170,11 @@ class NewPost extends React.Component {
         // this.setState({ data: post });
         try {
             const res = await api.get('posts', { id });
-            const preview = {
-                image: res.data.image,
-                image_details: res.data.image_details
-            };
+            let preview = {...this.state.preview};
+            preview['image'] = res.data.image;
             this.setState({ data: res.data, preview });
         } catch (err) {
-            console.error(err);
+            console.error(err.response);
         }
     }
 
@@ -299,7 +285,7 @@ class NewPost extends React.Component {
                                     </Col>
                                 </Row>
                             </Col>
-                            <Col lg={5}>
+                            {/* <Col lg={5}>
                                 <div
                                     onClick={() => this.inputImgDetails.click()}
                                     className="cursor-pointer--hover bg-white rounded-sm p-1 mb-3 brd-gray-light-v2 brd-around"
@@ -322,7 +308,7 @@ class NewPost extends React.Component {
                                         rows={4}
                                         placeholder="Tulis sesuatu..." />
                                 </Form.Group>
-                            </Col>
+                            </Col> */}
                         </Row>
                         <Row className="mb-3">
                             <Col lg={12}>
