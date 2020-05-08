@@ -34,16 +34,16 @@
             "description": "andinaeta@gmail.com"
         }
     ],
-    "production": false,
-    "count_visitor": false,
+    "production": true,
+    "count_visitor": true,
     "rest": {
         "server": {
             "naetastore": "https://naeta-rest-server.000webhostapp.com/",
-            "andinaeta": ""
+            "andinaeta": "https://naetalab.000webhostapp.com/"
         }
     },
     "default_route": {
         "admin": "/_rdn/administrator",
-        "member": "/_rdn"
+        "member": "/"
     }
 }
