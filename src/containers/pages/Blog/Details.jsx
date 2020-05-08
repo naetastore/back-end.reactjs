@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Container, Row, Col, Image } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import RightSidebar from './RightSidebar';
 import PostDetails from './Posts/Details';
 import Post from './Posts/Post';
@@ -39,7 +39,7 @@ class Details extends React.Component {
         this.props.setLoading(true);
 
         try {
-            const res = await api.post('posts/viewer', { id });
+            const res = await api.post('posts/viewers', { id });
             console.log(res.data.message);
         } catch (err) {
             console.error(err);
@@ -126,14 +126,14 @@ class Details extends React.Component {
                                     </Col>
                                     <Col md={9} className="blog-post">
                                         <Post data={post} />
-                                        <Image className="w-100" src={post.image_details} alt="post" />
+                                        {/* <Image className="w-100" src={post.image_details} alt="post" />
                                         <div className="mt-3">
                                             {post.body_details !== undefined ? (
                                                 post.body_details.split('\n').map((p, i) =>
                                                     <p key={i} className="font-weight-400">{p}</p>
                                                 )
                                             ) : false}
-                                        </div>
+                                        </div> */}
                                     </Col>
                                 </Row>
                                 {/* <Row>
