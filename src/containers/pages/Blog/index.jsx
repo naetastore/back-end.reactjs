@@ -15,7 +15,6 @@ function Blog(props) {
 
     useEffect(() => {
         if (!initialized) {
-            window.scroll(0, 0);
             getData();
         }
     });
