@@ -21,14 +21,15 @@ class Details extends React.Component {
     }
 
     componentDidMount() {
-        window.scroll(0, 0);
         this.getData();
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps) {
         const { params } = this.props.match;
         const { post } = this.state;
-        if (post.id !== params.id && Number(post.id) > 0) {
+        if (
+            post.id !== params.id && Number(post.id) > 0
+        ) {
             this.getData();
         }
     }
