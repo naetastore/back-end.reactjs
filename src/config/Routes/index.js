@@ -11,14 +11,13 @@ import MainMenu from '../../components/molecules/MainMenu';
 import Signup from '../../containers/pages/Signup';
 import Footer from '../../components/molecules/Footer';
 import Register from '../../containers/pages/Client/Register';
-import Axios from 'axios';
-import { REST } from '../REST';
 import session from '../session';
 import store from '../redux/store';
 import { NavLink } from 'react-router-dom';
 import Blog from '../../containers/pages/Blog';
 import Details from '../../containers/pages/Blog/Details';
 import { useLocation, HashRouter } from "react-router-dom";
+import { auth } from '../../services/auth';
 
 function ScrollToTop() {
     const { pathname } = useLocation();
@@ -108,6 +107,7 @@ function RegisterPage(props) {
 function HomePage(props) {
     return (
         <Fragment>
+            <ScrollToTop />
             <ShowMenu {...props} />
             <Root {...props} />
             <Footer />
@@ -127,25 +127,27 @@ function Authorized(props) {
     const checkSession = () => {
         let s = session.get;
 
-        if (s('username') === null) {
-            props.history.push('/auth?' + window.location.pathname);
+        if (!s('username')) {
+            props.history.push('/auth?' + window.location.hash);
             return;
         }
 
         s = { username: s('username'), password: s('password') };
 
         if (store.getState().userData.username === undefined) {
-            auth(s);
+            authentication(s);
         }
 
         setInitialized(true);
     }
 
-    const auth = data => {
-        Axios.get(`${REST.server.andinaeta}api/users`, { params: data })
-            .then(res => {
-                store.dispatch({ type: 'SET_USERDATA', data: res.data });
-            }).catch(err => console.log(err.response));
+    const authentication = async data => {
+        try {
+            const res = await auth(data);
+            store.dispatch({ type: 'SET_USERDATA', data: res.data });
+        } catch (err) {
+            console.log(err.response)
+        }
     }
 
     return null;

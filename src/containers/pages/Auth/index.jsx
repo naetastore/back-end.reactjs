@@ -6,7 +6,7 @@ import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import config from '../../../config.json';
 import dataJSON from '../../../data.json';
-import { api } from '../../../services/api';
+import { auth } from '../../../services/auth';
 import AlertOrg from '../../organism/Alert';
 
 function Auth(props) {
@@ -50,7 +50,7 @@ function Auth(props) {
         setIsLoading(true);
 
         try {
-            const res = await api.get('users', data);
+            const res = await auth(data);
             setIsLoading(false);
 
             res.data['password'] = data.password;
