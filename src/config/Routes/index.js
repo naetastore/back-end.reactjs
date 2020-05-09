@@ -1,24 +1,23 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
-import Auth from '../containers/pages/Auth';
-import Dashboard from '../containers/pages/Dashboard';
-import OrderDetail from '../containers/pages/Administrator/NaetaStore/Order/OrderDetail';
-import Administrator from '../containers/pages/Administrator';
-import NaetaStore from '../containers/pages/Administrator/NaetaStore';
-import Andi from '../containers/pages/Administrator/Andi';
-import Root from '../containers/pages/Root';
-import MainMenu from '../components/molecules/MainMenu';
-import Signup from '../containers/pages/Signup';
-import Footer from '../components/molecules/Footer';
-import Register from '../containers/pages/Client/Register';
+import Auth from '../../containers/pages/Auth';
+import Dashboard from '../../containers/pages/Dashboard';
+import OrderDetail from '../../containers/pages/Administrator/NaetaStore/Order/OrderDetail';
+import Administrator from '../../containers/pages/Administrator';
+import NaetaStore from '../../containers/pages/Administrator/NaetaStore';
+import Andi from '../../containers/pages/Administrator/Andi';
+import Root from '../../containers/pages/Root';
+import MainMenu from '../../components/molecules/MainMenu';
+import Signup from '../../containers/pages/Signup';
+import Footer from '../../components/molecules/Footer';
+import Register from '../../containers/pages/Client/Register';
 import Axios from 'axios';
-import { REST } from './REST';
-import config from '../config.json';
-import session from './session';
-import store from './redux/store';
+import { REST } from '../REST';
+import session from '../session';
+import store from '../redux/store';
 import { NavLink } from 'react-router-dom';
-import Blog from '../containers/pages/Blog';
-import Details from '../containers/pages/Blog/Details';
+import Blog from '../../containers/pages/Blog';
+import Details from '../../containers/pages/Blog/Details';
 import { useLocation, HashRouter } from "react-router-dom";
 
 function ScrollToTop() {
@@ -155,13 +154,7 @@ function Authorized(props) {
             }).catch(err => console.log(err.response));
     }
 
-    return (
-        <Fragment>
-            <MainMenu {...props}>
-                <ShowMenu />
-            </MainMenu>
-        </Fragment>
-    );
+    return null;
 }
 
 function AdministratorPage(props) {
@@ -224,26 +217,6 @@ function PostDetailPage(props) {
 }
 
 function Routes() {
-    const [initialized, setInitialized] = useState(false);
-
-    useEffect(() => {
-        if (!initialized) {
-            init();
-        }
-    });
-
-    const init = () => {
-        document.title = config.title;
-
-        if (config.count_visitor) {
-            Axios.post(`${REST.server.andinaeta}api/visitors`)
-                .then(res => console.log('now visitor count is', res.data.count))
-                .catch(err => console.log(err.response));
-        }
-
-        setInitialized(true);
-    }
-
     return (
         <BrowserRouter>
             <HashRouter>
