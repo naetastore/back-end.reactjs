@@ -30,7 +30,7 @@ function ScrollToTop() {
     return null;
 }
 
-function ShowMenu() {
+function ShowMenu(props) {
     const roleId = session.get('role_id');
 
     function PublicMenu() {
@@ -54,22 +54,24 @@ function ShowMenu() {
     if (!roleId) {
         // public menu
         return (
-            <PublicMenu />
+            <MainMenu {...props}>
+                <PublicMenu />
+            </MainMenu>
         );
     } else {
         // authorized menu
         if (roleId > 1) {
             return (
-                <Fragment>
+                <MainMenu {...props}>
                     <PublicMenu />
-                </Fragment>
+                </MainMenu>
             );
         } else {
             return (
-                <Fragment>
+                <MainMenu {...props}>
                     <PublicMenu />
                     <AuthorizedMenu />
-                </Fragment>
+                </MainMenu>
             );
         }
     }
@@ -78,9 +80,7 @@ function ShowMenu() {
 function ClientRegisterPage(props) {
     return (
         <Fragment>
-            <MainMenu {...props}>
-                <ShowMenu />
-            </MainMenu>
+            <ShowMenu {...props} />
             <Register {...props} />
             <Footer />
         </Fragment>
@@ -90,9 +90,7 @@ function ClientRegisterPage(props) {
 function LoginPage(props) {
     return (
         <Fragment>
-            <MainMenu {...props}>
-                <ShowMenu />
-            </MainMenu>
+            <ShowMenu {...props} />
             <Auth {...props} />
         </Fragment>
     );
@@ -101,9 +99,7 @@ function LoginPage(props) {
 function RegisterPage(props) {
     return (
         <Fragment>
-            <MainMenu {...props}>
-                <ShowMenu />
-            </MainMenu>
+            <ShowMenu {...props} />
             <Signup {...props} />
         </Fragment>
     );
@@ -112,9 +108,7 @@ function RegisterPage(props) {
 function HomePage(props) {
     return (
         <Fragment>
-            <MainMenu {...props}>
-                <ShowMenu />
-            </MainMenu>
+            <ShowMenu {...props} />
             <Root {...props} />
             <Footer />
         </Fragment>
@@ -157,12 +151,19 @@ function Authorized(props) {
     return null;
 }
 
+function DashboardPage(props) {
+    return (
+        <Fragment>
+            <ShowMenu {...props} />
+            <Dashboard {...props} />
+        </Fragment>
+    );
+}
+
 function AdministratorPage(props) {
     return (
         <Fragment>
-            <MainMenu {...props}>
-                <ShowMenu />
-            </MainMenu>
+            <ShowMenu {...props} />
             <Administrator {...props} />
         </Fragment>
     );
@@ -171,9 +172,7 @@ function AdministratorPage(props) {
 function AndiPage(props) {
     return (
         <Fragment>
-            <MainMenu {...props}>
-                <ShowMenu />
-            </MainMenu>
+            <ShowMenu {...props} />
             <Andi {...props} />
         </Fragment>
     );
@@ -182,9 +181,7 @@ function AndiPage(props) {
 function NaetaStorePage(props) {
     return (
         <Fragment>
-            <MainMenu {...props}>
-                <ShowMenu />
-            </MainMenu>
+            <ShowMenu {...props} />
             <NaetaStore {...props} />
         </Fragment>
     );
@@ -194,9 +191,7 @@ function BlogPage(props) {
     return (
         <Fragment>
             <ScrollToTop />
-            <MainMenu {...props}>
-                <ShowMenu />
-            </MainMenu>
+            <ShowMenu {...props} />
             <Blog {...props} />
             <Footer />
         </Fragment>
@@ -207,9 +202,7 @@ function PostDetailPage(props) {
     return (
         <Fragment>
             <ScrollToTop />
-            <MainMenu {...props}>
-                <ShowMenu />
-            </MainMenu>
+            <ShowMenu {...props} />
             <Details {...props} />
             <Footer />
         </Fragment>
@@ -225,7 +218,7 @@ function Routes() {
                 <Route path="/signup" component={RegisterPage} />
                 <Route path="/client/register" component={ClientRegisterPage} />
                 <Route path="/_rdn" component={Authorized} />
-                <Route path="/_rdn/dashboard" component={Dashboard} />
+                <Route path="/_rdn/dashboard" component={DashboardPage} />
                 <Route path="/_rdn/administrator" exact component={AdministratorPage} />
                 <Route path="/_rdn/administrator/andinaeta" exact component={AndiPage} />
                 <Route path="/_rdn/administrator/naetastore" exact component={NaetaStorePage} />
