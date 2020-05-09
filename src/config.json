@@ -34,8 +34,8 @@
             "description": "andinaeta@gmail.com"
         }
     ],
-    "production": true,
-    "count_visitor": true,
+    "production": false,
+    "count_visitor": false,
     "rest": {
         "server": {
             "naetastore": "https://naeta-rest-server.000webhostapp.com/",
